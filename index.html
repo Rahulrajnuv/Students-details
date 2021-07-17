@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Students details</title>
+</head>
+<body>
+    <section>
+        <div class="logo">
+            <img src="logo.png">
+            <span>University of Waterloo</span>
+        </div>
+           <form action="">
+             <select name="studentid" onchange="StudentID(this.value)">
+            <option value="">Select StudentID no.</option>
+            <option value="1">20124001</option>
+            <option value="2">20124002</option>
+            <option value="3">20124003</option>
+            <option value="4">20124004</option>
+            <option value="5">20124005</option>
+            </select>
+           </form>
+           <br>
+           <div id="txtHint"></div>
+    </section>
+    <script>
+        function StudentID(str){
+            var xhttp;
+            if(str == ""){
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "getdetails.php?q="+str, true);
+            xhttp.send();
+        }
+
+    </script>
+</body>
+</html>
